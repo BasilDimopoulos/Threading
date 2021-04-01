@@ -14,6 +14,14 @@ void function_1()
 int main()
 {
     thread t1(function_1); //t1 starts running
-    t1.join();             //main thread waits for t1 to finish
+    //t1.join();             //main thread waits for t1 to finish
+    t1.detach(); // t1 will act freely on its own -- daemon process
+
+    //...
+    if (t1.joinable())
+    {
+        t1.join(); // crash, once detached, always detached
+    }
+
     return 0;
 }
